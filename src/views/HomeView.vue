@@ -1,6 +1,6 @@
 
 <script setup>
-import { ref } from 'vue';
+import { ref,onMounted } from 'vue';
 import AboutView from '../views/AboutView.vue';
 import SkillsPage from '../views/SkillPage.vue';
 import PortfolioView from './PortfolioView.vue';
@@ -21,33 +21,67 @@ const about = ref(null);
 const skills = ref(null);
 const contact = ref(null);
 const portfolio = ref(null);
+const tokenvalue = ref(''); 
 
 function scrollToSection(sectionRef) {
   // console.log('sectionRef.value',sectionRef);
+ 
   
   // Use the ref to scroll to the appropriate section
   sectionRef.scrollIntoView({ behavior: 'smooth' });
 }
+function logout() {
+  localStorage.removeItem('token');
+  router.push('/'); // Redirect to the homepage after logout
+}
+
+onMounted(() => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    tokenvalue.value= token;
+
+    console.log('Token found:', token);
+    // Perform any action, e.g., navigate to a specific page or set user state
+  } else {
+    console.log('No token found');
+    // You can perform an alternative action here, like showing a login prompt
+  }
+});
 </script>
 <template>
  <nav class="text-white">
-        <div class="fixed top-0 left-0 p-4 bg-black w-full h-16 grid grid-cols-8 gap-3 place-content-center z-10">
-            <div class="nav-item contact font-bold py-4 ">
-              <button  @click="scrollToSection(about)">ABOUT ME</button>
+    <div class="fixed top-0 left-0 p-4 bg-black w-full h-16 grid grid-cols-8 gap-3 place-content-center z-10">
+        <div class="nav-item font-bold py-4">
+            <button @click="scrollToSection(about)">ABOUT ME</button>
         </div>
         <div class="nav-item font-bold py-4">
-          <button  @click="scrollToSection(skills)">SKILLS</button>
+            <button @click="scrollToSection(skills)">SKILLS</button>
         </div>
         <div class="nav-item font-bold py-4">
-          <button  @click="scrollToSection(portfolio)">PORTFOLIO</button>
-        </div> <div class="nav-item font-bold pt-4">
-            <button class="border-[2px] w-[50px] py-1 text-center bg-white text-black contact-me" @click="scrollToSection(contact)">CONTACT ME</button>
+            <button @click="scrollToSection(portfolio)">PORTFOLIO</button>
         </div>
+        <div class="nav-item font-bold pt-4">
+            <button class="border-[2px] w-[50px] py-1 text-center bg-white text-black contact-me" 
+                    @click="scrollToSection(contact)">
+                CONTACT ME
+            </button>
         </div>
-        
-        
-        
-      </nav>
+
+        <!-- Empty columns to push login/logout button to the rightmost grid -->
+        <div class="col-span-3"></div>
+
+        <!-- Login/Logout Button -->
+        <div class="nav-item font-bold py-4 text-right">
+            <button v-if="tokenvalue" @click="logout" class="border-[2px] px-4 py-1 text-center rounded-lg text-white bg-red-500">
+                Logout
+            </button>
+            <RouterLink :to="{name:'Login'}" v-else @click="logout" class="border-[2px] px-4 py-1 text-center rounded-lg text-white">
+                Login
+            </RouterLink>
+        </div>
+    </div>
+</nav>
+
   <div class="main-content" >
     <div class="content-body ">
       <div class="body-left bg-white">
