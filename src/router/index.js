@@ -25,4 +25,21 @@ const router = createRouter({
   ]
 })
 
+
+// router.beforeEach((to, _, next) => {
+//   // Replace with actual authentication logic
+
+//   if (to.name !== 'Login' && !isAuthenticated) {
+//     // Redirect to Login if not authenticated and trying to access a protected route
+//     next({ name: 'Login' });
+//   } else if (to.name === 'Login' && isAuthenticated) {
+//     // Redirect to Home if already authenticated and trying to access the Login page
+//     next({ name: 'home' });
+//   } else {
+//     // Proceed as normal
+//     next();
+//   }
+// });
+
+
 export default router

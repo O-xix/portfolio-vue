@@ -32,20 +32,20 @@ function scrollToSection(sectionRef) {
 }
 function logout() {
   localStorage.removeItem('token');
-  router.push('/'); // Redirect to the homepage after logout
+  router.push('/'); 
 }
 
 onMounted(() => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    tokenvalue.value= token;
+  tokenvalue.value = localStorage.getItem('token');
+  // if (token) {
+  //   tokenvalue.value= token;
 
-    console.log('Token found:', token);
-    // Perform any action, e.g., navigate to a specific page or set user state
-  } else {
-    console.log('No token found');
-    // You can perform an alternative action here, like showing a login prompt
-  }
+  //   console.log('Token found:', token);
+    
+  // } else {
+  //   console.log('No token found');
+    
+  // }
 });
 </script>
 <template>
