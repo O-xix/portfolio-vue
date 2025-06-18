@@ -1,4 +1,3 @@
-
 <script setup>
 import { ref,onMounted } from 'vue';
 import AboutView from '../views/AboutView.vue';
@@ -21,7 +20,6 @@ const about = ref(null);
 const skills = ref(null);
 const contact = ref(null);
 const portfolio = ref(null);
-const tokenvalue = ref(''); 
 
 function scrollToSection(sectionRef) {
   // console.log('sectionRef.value',sectionRef);
@@ -30,22 +28,9 @@ function scrollToSection(sectionRef) {
   // Use the ref to scroll to the appropriate section
   sectionRef.scrollIntoView({ behavior: 'smooth' });
 }
-function logout() {
-  localStorage.removeItem('token');
-  router.push('/'); 
-}
 
 onMounted(() => {
-  tokenvalue.value = localStorage.getItem('token');
-  // if (token) {
-  //   tokenvalue.value= token;
-
-  //   console.log('Token found:', token);
-    
-  // } else {
-  //   console.log('No token found');
-    
-  // }
+  // No login logic needed
 });
 </script>
 <template>
@@ -67,18 +52,9 @@ onMounted(() => {
             </button>
         </div>
 
-        <!-- Empty columns to push login/logout button to the rightmost grid -->
-        <div class="col-span-3"></div>
-
-        <!-- Login/Logout Button -->
-        <div class="nav-item font-bold py-4 text-right">
-            <button v-if="tokenvalue" @click="logout" class="border-[2px] px-4 py-1 text-center rounded-lg text-white bg-red-500">
-                Logout
-            </button>
-            <RouterLink :to="{name:'Login'}" v-else @click="logout" class="border-[2px] px-4 py-1 text-center rounded-lg text-white">
-                Login
-            </RouterLink>
-        </div>
+        <!-- Empty columns to push any future buttons to the rightmost grid -->
+        <div class="col-span-4"></div>
+        <!-- Removed Login/Logout Button -->
     </div>
 </nav>
 
@@ -90,7 +66,7 @@ onMounted(() => {
         <div class="flex justify-end place-content-center text-right bg-red my-[20%] px-8">
   <div class="text-black">
     <h2 class="font-bold text-left text-2xl ">Hi, I am</h2>
-    <h1 class="font-bold text-6xl">Tomasz Gajda</h1>
+    <h1 class="font-bold text-6xl">Teja Dasari</h1>
     <div class=" text-left text-[#909090]">
       <h1 class="font-bold text-2xl inline px-2">CSS</h1>
     <h1 class="font-bold text-2xl inline px-2">HTML</h1>
