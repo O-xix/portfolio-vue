@@ -27,3 +27,10 @@ npm run dev
 ```sh
 npm run build
 ```
+
+// ...existing code...
+"scripts": {
+"lint": "eslint . --ext .js,.vue",
+"format": "prettier --write ."
+}
+// ...existing code...
